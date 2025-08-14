@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUMINA | Maquiagem Artística</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@400;500;600&display=swap');
+        
+        :root {
+            --neon-pink: #ff2d75;
+            --neon-purple: #9c27ff;
+            --neon-blue: #00f2ff;
+            --soft-pink: #ffcce0;
+            --deep-purple: #3a0ca3;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #0f0e17;
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        .title-font {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .neon-text {
+            text-shadow: 0 0 5px var(--neon-pink), 
+                         0 0 10px var(--neon-pink), 
+                         0 0 20px var(--neon-purple);
+        }
+        
+        .neon-border {
+            box-shadow: 0 0 5px var(--neon-pink), 
+                        0 0 10px var(--neon-pink), 
+                        0 0 20px var(--neon-purple),
+                        inset 0 0 5px var(--neon-pink);
+        }
+        
+        .neon-hover:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 15px var(--neon-pink), 
+                        0 0 30px var(--neon-purple);
+            transition: all 0.3s ease;
+        }
+        
+        .glow {
+            animation: glow 2s infinite alternate;
+        }
+        
+        @keyframes glow {
+            from {
+                box-shadow: 0 0 5px var(--neon-pink), 
+                            0 0 10px var(--neon-pink);
+            }
+            to {
+                box-shadow: 0 0 10px var(--neon-pink), 
+                            0 0 20px var(--neon-purple),
+                            0 0 30px var(--deep-purple);
+            }
+        }
+        
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        .makeup-card {
+            perspective: 1000px;
+            transform-style: preserve-3d;
+        }
+        
+        .makeup-card:hover .card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .card-inner {
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+        
+        .card-front, .card-back {
+            backface-visibility: hidden;
+        }
+        
+        .card-back {
+            transform: rotateY(180deg);
+        }
+        
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating particles -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="absolute top-1/4 left-1/4 w-3 h-3 rounded-full bg-pink-500 opacity-70 floating" style="animation-delay: 0s;"></div>
+        <div class="absolute top-1/3 right-1/4 w-2 h-2 rounded-full bg-purple-500 opacity-70 floating" style="animation-delay: 1s;"></div>
+        <div class="absolute top-2/3 left-1/3 w-4 h-4 rounded-full bg-blue-400 opacity-70 floating" style="animation-delay: 2s;"></div>
+        <div class="absolute bottom-1/4 right-1/3 w-3 h-3 rounded-full bg-pink-400 opacity-70 floating" style="animation-delay: 3s;"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-black bg-opacity-70 backdrop-filter backdrop-blur-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-2xl font-bold neon-text title-font">LUMINA</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="px-3 py-2 rounded-md text-sm font-medium text-white hover:text-pink-300 transition duration-300">Home</a>
+                        <a href="#services" class="px-3 py-2 rounded-md text-sm font-medium text-white hover:text-purple-300 transition duration-300">Serviços</a>
+                        <a href="#portfolio" class="px-3 py-2 rounded-md text-sm font-medium text-white hover:text-blue-300 transition duration-300">Portfólio</a>
+                        <a href="#about" class="px-3 py-2 rounded-md text-sm font-medium text-white hover:text-pink-300 transition duration-300">Sobre</a>
+                        <a href="#contact" class="px-3 py-2 rounded-md text-sm font-medium text-white bg-gradient-to-r from-pink-500 to-purple-600 rounded-full hover:opacity-80 transition duration-300">Agendamento</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button class="text-white focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-black via-purple-900 to-black opacity-60"></div>
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80')] bg-cover bg-center parallax"></div>
+        
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 neon-text title-font">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400">Revele sua beleza</span>
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 text-pink-100">Maquiagem artística que ilumina sua essência com toques mágicos e modernos</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#contact" class="px-8 py-3 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-white font-semibold hover:opacity-80 transition duration-300 neon-hover">Agendar Sessão</a>
+                <a href="#portfolio" class="px-8 py-3 border-2 border-pink-400 rounded-full text-pink-300 font-semibold hover:bg-pink-900 hover:bg-opacity-30 transition duration-300 neon-hover">Ver Portfólio</a>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-0 right-0 flex justify-center">
+            <a href="#services" class="text-white animate-bounce">
+                <i class="fas fa-chevron-down text-2xl"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-gradient-to-b from-black via-purple-900 to-black">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 neon-text title-font">Nossos Serviços</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-pink-500 to-blue-500 mx-auto mb-6"></div>
+                <p class="text-xl text-pink-100 max-w-3xl mx-auto">Transformação artística para cada ocasião especial da sua vida</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Service 1 -->
+                <div class="makeup-card h-full">
+                    <div class="card-inner h-full">
+                        <div class="card-front h-full bg-gray-900 bg-opacity-50 rounded-xl overflow-hidden neon-border p-6 flex flex-col">
+                            <div class="text-pink-400 text-4xl mb-4">
+                                <i class="fas fa-gem"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3 text-white">Noivas</h3>
+                            <p class="text-pink-100 mb-6 flex-grow">Maquiagem perfeita para o seu grande dia, com duração prolongada e fotografia impecável.</p>
+                            <div class="text-pink-300 text-sm font-semibold">Ver detalhes →</div>
+                        </div>
+                        <div class="card-back absolute inset-0 bg-gradient-to-br from-pink-900 to-purple-900 rounded-xl p-6 flex flex-col justify-center">
+                            <h3 class="text-2xl font-bold mb-3 text-white">Pacote Noiva</h3>
+                            <ul class="text-pink-100 space-y-2 mb-6">
+                                <li class="flex items-center"><i class="fas fa-check-circle text-pink-400 mr-2"></i> Teste de maquiagem</li>
+                                <li class="flex items-center"><i class="fas fa-check-circle text-pink-400 mr-2"></i> Produtos à prova d'água</li>
+                                <li class="flex items-center"><i class="fas fa-check-circle text-pink-400 mr-2"></i> Toque final no local</li>
+                            </ul>
+                            <div class="text-xl font-bold text-white">A partir de R$ 450</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="makeup-card h-full">
+                    <div class="card-inner h-full">
+                        <div class="card-front h-full bg-gray-900 bg-opacity-50 rounded-xl overflow-hidden neon-border p-6 flex flex-col">
+                            <div class="text-purple-400 text-4xl mb-4">
+                                <i class="fas fa-magic"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3 text-white">Artística</h3>
+                            <p class="text-pink-100 mb-6 flex-grow">Criações únicas para festivais, fotos criativas ou simplesmente para se expressar.</p>
+                            <div class="text-purple-300 text-sm font-semibold">Ver detalhes →</div>
+                        </div>
+                        <div class="card-back absolute inset-0 bg-gradient-to-br from-purple-900 to-blue-900 rounded-xl p-6 flex flex-col justify-center">
+                            <h3 class="text-2xl font-bold mb-3 text-white">Maquiagem Artística</h3>
+                            <ul class="text-blue-100 space-y-2 mb-6">
+                                <li class="flex items-center"><i class="fas fa-check-circle text-purple-400 mr-2"></i> Design personalizado</li>
+                                <li class="flex items-center"><i class="fas fa-check-circle text-purple-400 mr-2"></i> Materiais profissionais</li>
+                                <li class="flex items-center"><i class="fas fa-check-circle text-purple-400 mr-2"></i> Efeitos especiais</li>
+                            </ul>
+                            <div class="text-xl font-bold text-white">A partir de R$ 350</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="makeup-card h-full">
+                    <div class="card-inner h-full">
+                        <div class="card-front h-full bg-gray-900 bg-opacity-50 rounded-xl overflow-hidden neon-border p-6 flex flex-col">
+                            <div class="text-blue-400 text-4xl mb-4">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3 text-white">Social</h3>
+                            <p class="text-pink-100 mb-6 flex-grow">Maquiagem elegante para eventos sociais, formaturas ou noites especiais.</p>
+                            <div class="text-blue-300 text-sm font-semibold">Ver detalhes →</div>
+                        </div>
+                        <div class="card-back absolute inset-0 bg-gradient-to-br from-blue-900 to-purple-900 rounded-xl p-6 flex flex-col justify-center">
+                            <h3 class="text-2xl font-bold mb-3 text-white">Maquiagem Social</h3>
+                            <ul class="text-blue-100 space-y-2 mb-6">
+                                <li class="flex items-center"><i class="fas fa-check-circle text-blue-400 mr-2"></i> Consultoria de estilo</li>
+                                <li class="flex items-center"><i class="fas fa-check-circle text-blue-400 mr-2"></i> Técnicas de realce</li>
+                                <li class="flex items-center"><i class="fas fa-check-circle text-blue-400 mr-2"></i> Pele impecável</li>
+                            </ul>
+                            <div class="text-xl font-bold text-white">A partir de R$ 250</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-20 bg-black">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 neon-text title-font">Portfólio</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-pink-500 to-blue-500 mx-auto mb-6"></div>
+                <p class="text-xl text-pink-100 max-w-3xl mx-auto">Algumas das nossas transformações mais marcantes</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Portfolio Item 1 -->
+                <div class="group relative overflow-hidden rounded-xl h-90 neon-hover">
+                    <img src="https://img.freepik.com/fotos-gratis/noiva-obtendo-dela-compoem-pronto_23-2148105854.jpg" 
+                         alt="Maquiagem de noiva" 
+                         class="w-full h-50 object-cover transform group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+                    <div class="absolute bottom-0 left-0 p-6 w-full">
+                        <h3 class="text-xl font-bold text-white">Noiva Clássica</h3>
+                        <p class="text-pink-200">Maquiagem natural com toque de glamour</p>
+                    </div>
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <div class="text-white text-4xl">
+                            <i class="fas fa-expand"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 2 -->
+                <div class="group relative overflow-hidden rounded-xl h-90 neon-hover">
+                    <img src="https://img.freepik.com/fotos-gratis/retrato-brilhante-de-uma-mulher-linda_23-2151934080.jpg" 
+                         alt="Maquiagem artística" 
+                         class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+                    <div class="absolute bottom-0 left-0 p-6 w-full">
+                        <h3 class="text-xl font-bold text-white">Fantasia Galáctica</h3>
+                        <p class="text-purple-200">Efeitos metálicos e brilho estelar</p>
+                    </div>
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <div class="text-white text-4xl">
+                            <i class="fas fa-expand"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 3 -->
+                <div class="group relative overflow-hidden rounded-xl h-90 neon-hover">
+                    <img src="https://img.freepik.com/fotos-gratis/modelo-com-olhos-esfumacados-e-brincos-com-circulo-dourado_114579-9306.jpg" 
+                         alt="Maquiagem social" 
+                         class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+                    <div class="absolute bottom-0 left-0 p-6 w-full">
+                        <h3 class="text-xl font-bold text-white">Elegância Noturna</h3>
+                        <p class="text-blue-200">Smokey eyes e contorno perfeito</p>
+                    </div>
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <div class="text-white text-4xl">
+                            <i class="fas fa-expand"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 4 -->
+                <div class="group relative overflow-hidden rounded-xl h-90 neon-hover">
+                    <img src="https://img.freepik.com/fotos-premium/modelo-com-maquiagem-brilhante-e-glitter-colorido_162568-1043.jpg" 
+                         alt="Maquiagem editorial" 
+                         class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+                    <div class="absolute bottom-0 left-0 p-6 w-full">
+                        <h3 class="text-xl font-bold text-white">Editorial Moda</h3>
+                        <p class="text-pink-200">Conceito ousado para campanhas</p>
+                    </div>
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <div class="text-white text-4xl">
+                            <i class="fas fa-expand"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 5 -->
+                <div class="group relative overflow-hidden rounded-xl h-90 neon-hover">
+                    <img src="https://img.freepik.com/fotos-gratis/retrato-divertido-com-decoracoes-no-rosto_23-2150749283.jpg" 
+                         alt="Maquiagem para festivais" 
+                         class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+                    <div class="absolute bottom-0 left-0 p-6 w-full">
+                        <h3 class="text-xl font-bold text-white">Festival Colorido</h3>
+                        <p class="text-purple-200">Cores vibrantes e glitter</p>
+                    </div>
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <div class="text-white text-4xl">
+                            <i class="fas fa-expand"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 6 -->
+                <div class="group relative overflow-hidden rounded-xl h-90 neon-hover">
+                    <img src="https://img.freepik.com/fotos-gratis/noiva-se-maquiando-para-a-vista-lateral-do-casamento_23-2149860809.jpg" 
+                         alt="Maquiagem para photoshoot" 
+                         class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+                    <div class="absolute bottom-0 left-0 p-6 w-full">
+                        <h3 class="text-xl font-bold text-white">Beleza Natural</h3>
+                        <p class="text-blue-200">Realce da beleza interior</p>
+                    </div>
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <div class="text-white text-4xl">
+                            <i class="fas fa-expand"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-16">
+                <a href="#" class="px-8 py-3 border-2 border-pink-400 rounded-full text-pink-300 font-semibold hover:bg-pink-900 hover:bg-opacity-30 transition duration-300 inline-flex items-center neon-hover">
+                    Ver Mais Trabalhos <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gradient-to-b from-purple-900 to-black">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="lg:w-1/2 relative">
+                    <div class="relative z-10 rounded-xl overflow-hidden neon-border h-96 w-full">
+                        <img src="https://img.freepik.com/fotos-gratis/mulher-jovem-e-bonita-de-cabelo-curto-asiatica-a-aplicar-pincel-de-po-cosmetico_1150-13018.jpg" 
+                             alt="Maquiadora profissional" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute -bottom-5 -right-5 w-32 h-32 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 opacity-70 z-0"></div>
+                </div>
+                
+                <div class="lg:w-1/2 mt-10 lg:mt-0">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 neon-text title-font">Sobre Mim</h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-pink-500 to-blue-500 mb-8"></div>
+                    
+                    <p class="text-lg text-pink-100 mb-6">
+                        Olá, eu sou a Camila, maquiadora profissional há mais de 8 anos. Minha paixão pela maquiagem começou como uma forma de arte e autoexpressão, e hoje transformo rostos em verdadeiras obras de arte.
+                    </p>
+                    
+                    <p class="text-lg text-pink-100 mb-8">
+                        Acredito que cada pessoa tem uma beleza única, e meu trabalho é destacar essa singularidade com técnicas profissionais e produtos de alta qualidade. Minha abordagem combina tendências modernas com um toque pessoal, criando looks que refletem sua personalidade.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-4 mb-8">
+                        <div class="flex items-center">
+                            <div class="mr-3 text-pink-400 text-xl">
+                                <i class="fas fa-award"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white">Certificada</h4>
+                                <p class="text-sm text-pink-200">5 cursos internacionais</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="mr-3 text-purple-400 text-xl">
+                                <i class="fas fa-palette"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white">+1000 Clientes</h4>
+                                <p class="text-sm text-purple-200">Transformações realizadas</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="mr-3 text-blue-400 text-xl">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white">100% Natural</h4>
+                                <p class="text-sm text-blue-200">Produtos cruelty-free</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="mr-3 text-pink-400 text-xl">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white">5.0 Avaliação</h4>
+                                <p class="text-sm text-pink-200">Clientes satisfeitas</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="#contact" class="px-8 py-3 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-white font-semibold hover:opacity-80 transition duration-300 inline-flex items-center neon-hover">
+                        Vamos Conversar <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-20 bg-black">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 neon-text title-font">Depoimentos</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-pink-500 to-blue-500 mx-auto mb-6"></div>
+                <p class="text-xl text-pink-100 max-w-3xl mx-auto">O que minhas clientes dizem sobre o trabalho</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-gray-900 bg-opacity-50 rounded-xl p-8 neon-border hover:bg-opacity-70 transition duration-300">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-pink-100 mb-6 italic">"A Camila transformou meu visual no dia do meu casamento. Fiquei radiante e a maquiagem durou o dia todo, mesmo com as lágrimas de felicidade!"</p>
+                    <div class="flex items-center">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                             alt="Cliente satisfeita" 
+                             class="w-12 h-12 rounded-full object-cover mr-4">
+                        <div>
+                            <h4 class="font-bold text-white">Ana Carolina</h4>
+                            <p class="text-sm text-pink-300">Noiva</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-gray-900 bg-opacity-50 rounded-xl p-8 neon-border hover:bg-opacity-70 transition duration-300">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-pink-100 mb-6 italic">"Para minha formatura, queria algo especial. A Camila capturou exatamente o que eu imaginava e ainda sugeriu detalhes que fizeram toda a diferença!"</p>
+                    <div class="flex items-center">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80" 
+                             alt="Cliente satisfeita" 
+                             class="w-12 h-12 rounded-full object-cover mr-4">
+                        <div>
+                            <h4 class="font-bold text-white">Juliana Santos</h4>
+                            <p class="text-sm text-purple-300">Formatura</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="bg-gray-900 bg-opacity-50 rounded-xl p-8 neon-border hover:bg-opacity-70 transition duration-300">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-pink-100 mb-6 italic">"Como modelo, trabalho com muitos maquiadores, mas a Camila tem um talento único para entender a visão do fotógrafo e trazer para a vida."</p>
+                    <div class="flex items-center">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" 
+                             alt="Cliente satisfeita" 
+                             class="w-12 h-12 rounded-full object-cover mr-4">
+                        <div>
+                            <h4 class="font-bold text-white">Fernanda Lima</h4>
+                            <p class="text-sm text-blue-300">Modelo</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gradient-to-b from-black to-purple-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 neon-text title-font">Agendamento</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-pink-500 to-blue-500 mx-auto mb-6"></div>
+                <p class="text-xl text-pink-100 max-w-3xl mx-auto">Pronta para transformar seu visual? Entre em contato!</p>
+            </div>
+            
+            <div class="flex flex-col lg:flex-row gap-12">
+                <div class="lg:w-1/2">
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-pink-200 mb-1">Seu Nome</label>
+                                <input type="text" id="name" class="w-full px-4 py-3 bg-gray-900 bg-opacity-50 border border-purple-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-white placeholder-purple-300">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-pink-200 mb-1">E-mail</label>
+                                <input type="email" id="email" class="w-full px-4 py-3 bg-gray-900 bg-opacity-50 border border-purple-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-white placeholder-purple-300">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-pink-200 mb-1">Telefone</label>
+                            <input type="tel" id="phone" class="w-full px-4 py-3 bg-gray-900 bg-opacity-50 border border-purple-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-white placeholder-purple-300">
+                        </div>
+                        <div>
+                            <label for="service" class="block text-sm font-medium text-pink-200 mb-1">Serviço Desejado</label>
+                            <select id="service" class="w-full px-4 py-3 bg-gray-900 bg-opacity-50 border border-purple-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-white">
+                                <option class="bg-gray-900">Selecione um serviço</option>
+                                <option class="bg-gray-900">Maquiagem para Noivas</option>
+                                <option class="bg-gray-900">Maquiagem Artística</option>
+                                <option class="bg-gray-900">Maquiagem Social</option>
+                                <option class="bg-gray-900">Editorial/Fotografia</option>
+                                <option class="bg-gray-900">Aula de Automaquiagem</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="date" class="block text-sm font-medium text-pink-200 mb-1">Data Preferencial</label>
+                            <input type="date" id="date" class="w-full px-4 py-3 bg-gray-900 bg-opacity-50 border border-purple-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-white">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-pink-200 mb-1">Mensagem</label>
+                            <textarea id="message" rows="4" class="w-full px-4 py-3 bg-gray-900 bg-opacity-50 border border-purple-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-white placeholder-purple-300"></textarea>
+                        </div>
+                        <div>
+                            <button type="submit" class="w-full px-6 py-4 bg-gradient-to-r from-pink-500 to-purple-600 rounded-lg text-white font-bold hover:opacity-90 transition duration-300 neon-hover">
+                                Enviar Solicitação
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="lg:w-1/2">
+                    <div class="bg-gray-900 bg-opacity-50 rounded-xl p-8 h-full neon-border">
+                        <h3 class="text-2xl font-bold mb-6 text-white">Informações de Contato</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="text-pink-400 text-xl mt-1 mr-4">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white mb-1">Estúdio LUMINA</h4>
+                                    <p class="text-pink-200">Rua das Artes, 123 - Centro<br>São Paulo/SP</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="text-purple-400 text-xl mt-1 mr-4">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white mb-1">E-mail</h4>
+                                    <p class="text-purple-200">contato@luminabeauty.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="text-blue-400 text-xl mt-1 mr-4">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white mb-1">Telefone</h4>
+                                    <p class="text-blue-200">(11) 98765-4321</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="text-pink-400 text-xl mt-1 mr-4">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white mb-1">Horário de Atendimento</h4>
+                                    <p class="text-pink-200">Segunda a Sábado: 9h às 19h<br>Domingo: Somente com agendamento</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-10">
+                            <h4 class="font-bold text-white mb-4">Redes Sociais</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="w-10 h-10 rounded-full bg-pink-600 flex items-center justify-center text-white hover:bg-pink-700 transition duration-300 neon-hover">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white hover:bg-blue-700 transition duration-300 neon-hover">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-pink-500 flex items-center justify-center text-white hover:bg-pink-600 transition duration-300 neon-hover">
+                                    <i class="fab fa-tiktok"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-red-500 flex items-center justify-center text-white hover:bg-red-600 transition duration-300 neon-hover">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-10 bg-gradient-to-r from-purple-900 to-pink-900 rounded-lg p-6 neon-border">
+                            <h4 class="font-bold text-white mb-2">Dica da Camila</h4>
+                            <p class="text-pink-100 text-sm">"Sempre faço uma consulta gratuita antes da maquiagem para entender suas preferências e necessidades da sua pele. Traga referências e ideias - adoro criar looks personalizados!"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <span class="text-2xl font-bold neon-text title-font">LUMINA</span>
+                    <p class="text-pink-200 mt-2">Maquiagem artística e transformadora</p>
+                </div>
+                
+                <div class="flex flex-col items-center md:items-end">
+                    <div class="flex space-x-6 mb-4">
+                        <a href="#" class="text-pink-300 hover:text-pink-500 transition duration-300">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-purple-300 hover:text-purple-500 transition duration-300">
+                            <i class="fab fa-facebook-f text-xl"></i>
+                        </a>
+                        <a href="#" class="text-blue-300 hover:text-blue-500 transition duration-300">
+                            <i class="fab fa-whatsapp text-xl"></i>
+                        </a>
+                    </div>
+                    <p class="text-sm text-gray-400">© 2023 LUMINA Beauty. Todos os direitos reservados.</p>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center">
+                <div class="flex space-x-6 mb-4 md:mb-0">
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300 text-sm">Política de Privacidade</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300 text-sm">Termos de Serviço</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300 text-sm">FAQ</a>
+                </div>
+                <div class="text-gray-400 text-sm">Desenvolvido por Schimitana Studio</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#home" class="fixed bottom-8 right-8 w-12 h-12 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full flex items-center justify-center text-white shadow-lg neon-hover z-50">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script>
+        // Simple smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Mobile menu toggle would go here
+        // This is a placeholder for actual implementation
+        
+        // Form submission handling would go here
+        // This is a placeholder for actual implementation
+    </script>
+</body>
+</html>
